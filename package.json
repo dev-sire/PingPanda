@@ -11,11 +11,14 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
+    "@clerk/nextjs": "^6.3.4",
     "@neondatabase/serverless": "^0.9.4",
     "@prisma/adapter-neon": "^5.18.0",
     "@prisma/client": "^5.18.0",
+    "@radix-ui/react-slot": "^1.1.0",
     "@tanstack/react-query": "^5.51.23",
     "@upstash/redis": "^1.34.0",
+    "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "hono": "^4.5.5",
     "lucide-react": "^0.456.0",
@@ -24,7 +27,8 @@
     "react": "^18",
     "react-dom": "^18",
     "superjson": "^2.2.1",
-    "tailwind-merge": "^2.5.2",
+    "tailwind-merge": "^2.5.4",
+    "tailwindcss-animate": "^1.0.7",
     "wrangler": "^3.72.0",
     "zod": "^3.23.8"
   },
