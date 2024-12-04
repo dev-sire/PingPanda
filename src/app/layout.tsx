@@ -15,7 +15,7 @@ const eb_garamond = EB_Garamond({
 
 export const metadata: Metadata = {
 	title: "PingPanda - Real-time monitoring made easy!",
-	description: "Created using jStack",
+	description: "Customizable notifications, proactive monitoring, and easy setup. All in one place.",
 	icons: [{ rel: "icon", url: "/favicon.ico" }],
 }
 

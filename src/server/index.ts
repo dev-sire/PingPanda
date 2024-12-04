@@ -1,7 +1,8 @@
 import { Hono } from "hono"
 import { cors } from "hono/cors"
 import { handle } from "hono/vercel"
-import { postRouter } from "./routers/post-router"
+import { authRouter } from "./routers/auth-router"
+import { categoryRouter } from "./routers/category-router"
 
 const app = new Hono().basePath("/api").use(cors())
 
@@ -10,7 +11,7 @@ const app = new Hono().basePath("/api").use(cors())
  *
  * All routers added in /server/routers should be manually added here.
  */
-const appRouter = app.route("/post", postRouter)
+const appRouter = app.route("/auth", authRouter).route("/category", categoryRouter)
 
 // The handler Next.js uses to answer API requests
 export const httpHandler = handle(app)

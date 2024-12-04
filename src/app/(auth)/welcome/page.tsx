@@ -1,8 +1,31 @@
+"use client"
 import { Heading } from "@/components/heading";
 import { LoadingSpinner } from "@/components/loading-spinner";
+import { client } from "@/lib/client";
+import { useQuery } from "@tanstack/react-query";
 import { LucideProps } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const Page = () => {
+
+    const router = useRouter()
+
+    const { data } = useQuery({
+        queryFn: async () => {
+            const res = await client.auth.getDatabaseSyncStatus.$get()
+            return await res.json()
+        },
+        queryKey: ["get-database-sync-status"],
+        refetchInterval: (query) => {
+            return query.state.data?.isSynced ? false : 1000
+        },
+    })
+
+    useEffect(() => {
+        if(data?.isSynced) router.push("/dashboard")
+    }, [data, router])
+
     return(
         <div className="flex flex-1 w-full items-center justify-center px-4">
             <BackgroundPattern className="absolute inset-0 left-1/2 z-0 -translate-x-1/2 opacity-75" />
