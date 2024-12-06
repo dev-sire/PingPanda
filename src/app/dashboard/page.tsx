@@ -2,6 +2,7 @@ import { DashboardPage } from "@/components/dashboard-page";
 import { db } from "@/db";
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+import { DashboardPageContent } from "./dashboard-page-content";
 
 const Page = async () => {
 
@@ -20,7 +21,9 @@ const Page = async () => {
     }
 
     return(
-        <DashboardPage title="dashboard">Dashboard Page Content</DashboardPage>
+        <DashboardPage title="Dashboard">
+            <DashboardPageContent />
+        </DashboardPage>
     )
 }
 export default Page;
