@@ -99,5 +99,20 @@ export const categoryRouter = router({
         })
 
         return c.json({ eventCategory })
+    }),
+    insertQuickstartCategory: privateProcedure.mutation(async({ctx, c}) => {
+
+        const categories = await db.eventCategory.createMany({
+            data: [
+                { name: "Bug", emoji: "🐛", color: 0xff6b6b },
+                { name: "Sale", emoji: "💰", color: 0xffeb3b },
+                { name: "Question", emoji: "🤔", color: 0x6cfce7 }
+            ].map((category) => ({
+                ...category,
+                userId: ctx.user.id
+            }))
+        })
+
+        return c.json({ success: true, count: categories.count })
     })
 })
