@@ -2,6 +2,7 @@ import { DashboardPage } from "@/components/dashboard-page"
 import { db } from "@/db"
 import { currentUser } from "@clerk/nextjs/server"
 import { notFound } from "next/navigation"
+import { CategoryPageContent } from "./category-page-content"
 
 interface PageProps{
     params: {
