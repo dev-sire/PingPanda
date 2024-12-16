@@ -48,7 +48,7 @@ const Page = async ({ params }: PageProps) => {
 
     return(
         <DashboardPage title={`${category.emoji} ${category.name} events`}>
-            
+            <CategoryPageContent hasEvents={hasEvents} category={category} />
         </DashboardPage>
     )
 }
