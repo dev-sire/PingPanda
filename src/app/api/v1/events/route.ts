@@ -82,4 +82,99 @@ export const POST = async (req: NextRequest) => {
     }
 
     const discord = new DiscordClient(process.env.DISCORD_BOT_TOKEN)
+
+    const dmChannel = await discord.createDM(user.discordId)
+
+    let requestData: unknown
+
+    try {
+
+        requestData = await req.json()
+        
+    } catch (error) {
+        return NextResponse.json({
+            message: "Invalid JSON request body" 
+        }, { status: 400 })
+    }
+
+    const validationResults = REQUEST_VALIDATOR.parse(requestData)
+
+    const category = user.EventCategories.find(
+        (cat) => cat.name === validationResults.category
+    )
+
+    if(!category){
+        return NextResponse.json({
+            message: `You have no category named ${validationResults.category}`
+        }, {
+            status: 404
+        })
+    }
+
+    const eventData = {
+        title: `${category.emoji || "🔔"} ${category.name.charAt(0).toUpperCase() + category.name.slice(1)}`,
+        description: validationResults.description || `A new ${category.name} event occurred!`,
+        color: category.color,
+        timestamp: new Date().toISOString(),
+        fields: Object.entries(validationResults.fields || {}).map(
+            ([key, value]) => {
+                return{
+                    name: key,
+                    value: String(value),
+                    inline: true,
+                }
+            }
+        )
+    }
+
+    const event = await db.event.create({
+        data: {
+            name: category.name,
+            formattedMessage: `${eventData.title}\n\n${eventData.description}`,
+            userId: user.id,
+            fields: validationResults.fields || {},
+            eventCategoryId: category.id
+        }
+    })
+
+    try {
+        
+        await discord.sendEmbed(dmChannel.id, eventData)
+
+        await db.event.update({
+            where: { id: event.id },
+            data: { deliveryStatus: "DELIVERED" }
+        })
+
+        await db.quota.upsert({
+            where: { userId: user.id, month: currentMonth, year: currentYear },
+            update: { count: { increment: 1 } },
+            create: {
+                userId: user.id,
+                month: currentMonth,
+                year: currentYear,
+                count: 1
+            }
+        })
+
+    } catch (error) {
+        await db.event.update({
+            where: { id: event.id },
+            data: { deliveryStatus: "DELIVERED" }
+        })
+
+        console.log(error)
+
+        return NextResponse.json({
+            message: "Error processing event",
+            eventId: event.id
+        }, {
+            status: 500
+        })
+    }
+
+    return NextResponse.json({
+        message: "Event processed successfully",
+        eventId: event.id,
+    })
 }
