@@ -1,14 +1,15 @@
 import { Heading } from "@/components/heading";
 import { MaxWidthWrapper } from "@/components/max-width-wrapper";
-import { Check, Star, StarHalf } from "lucide-react";
+import { Check, GitCommitHorizontal, Github, Star, StarHalf } from "lucide-react";
 import { ShinyButton } from "@/components/shiny-button";
 import { MockDiscordUI } from "@/components/mock-discord-ui";
-import { AnimatedList, AnimatedListItem } from "@/components/ui/animated-list";
+import { AnimatedList } from "@/components/ui/animated-list";
 import { DiscordMessage } from "@/components/discord-message";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import Image from "next/image";
 import { Icons } from "@/components/icons";
+import Link from "next/link";
 
 const Page = () => {
 
@@ -293,6 +294,11 @@ const Page = () => {
 					<ShinyButton href="/sign-up" className="relative h-14 z-10 w-full max-w-xs text-base shadow-lg transition-shadow duration-300 hover:shadow-xl">
 						Start For Free Today
 					</ShinyButton>
+					<div>
+						<h2 className="text-center text-base/7 font-semibold text-brand-600">
+							Built with ❤️ by Aman Shahid, you can contribute to the project on <Link href="https://github.com/dev-sire/PingPanda" target="_blank" className="font-bold">GitHub</Link>
+						</h2>
+					</div>
 				</MaxWidthWrapper>
 			</section>
 		</>

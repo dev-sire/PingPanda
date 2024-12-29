@@ -30,7 +30,7 @@ export const EmptyCategoryState = ({ categoryName }: { categoryName: string }) =
         if(hasEvents) router.refresh()
     }, [hasEvents, router])
 
-    const codeSnippet = `await fetch('http://localhost:3000/api/events', {
+    const codeSnippet = `await fetch('https://pingpanda-devsire.vercel.app/api/v1/events', {
   method: 'POST',
   headers: {
     'Authorization': 'Bearer YOUR_API_KEY'
