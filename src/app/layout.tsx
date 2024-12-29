@@ -14,9 +14,15 @@ const eb_garamond = EB_Garamond({
 })
 
 export const metadata: Metadata = {
+	metadataBase: new URL('https://pingpanda-devsire.vercel.app'),
 	title: "PingPanda - Real-time monitoring made easy!",
 	description: "Customizable notifications, proactive monitoring, and easy setup. All in one place.",
 	icons: [{ rel: "icon", url: "/favicon.ico" }],
+	openGraph: {
+		title: "PingPanda - Real-time monitoring made easy!",
+		description: "Customizable notifications, proactive monitoring, and easy setup. All in one place.",
+		url: "https://pingpanda-devsire.vercel.app",
+	}
 }
 
 export default function RootLayout({
