@@ -1,4 +1,4 @@
-# PingPanda: Developer-Friendly SaaS Monitoring
+# PingPanda: SaaS Monitoring App
 
 ### Overview
 
