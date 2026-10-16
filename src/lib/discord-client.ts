@@ -19,6 +19,18 @@ export class DiscordClient {
         }) as Promise<RESTPostAPICurrentUserCreateDMChannelResult>
     }
 
+    async isGuildMember(guildId: string, userId: string): Promise<boolean> {
+        try {
+            await this.rest.get(Routes.guildMember(guildId, userId))
+            return true
+        } catch (error) {
+            // 404 / code 10007 = Unknown Member (user is not in the server)
+            const e = error as { status?: number; code?: number }
+            if (e?.status === 404 || e?.code === 10007 || e?.code === 10013) return false
+            throw error
+        }
+    }
+
     async sendEmbed(channelId: string, embed: APIEmbed): Promise<RESTPostAPIChannelMessageResult> {
         return this.rest.post(Routes.channelMessages(channelId), {
             body: { embeds: [embed] }

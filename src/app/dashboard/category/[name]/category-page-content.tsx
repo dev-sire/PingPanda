@@ -125,18 +125,26 @@ export const CategoryPageContent = ({
                 accessorKey: "deliveryStatus",
                 header: "Delivery Status",
                 cell: ({ row }) => (
-                    <span
-                        className={cn("px-2 py-1 rounded-full text-xs font-semibold", {
-                            "bg-green-100 text-green-800":
-                                row.getValue("deliveryStatus") === "DELIVERED",
-                            "bg-red-100 text-red-800":
-                                row.getValue("deliveryStatus") === "FAILED",
-                            "bg-yellow-100 text-yellow-800":
-                                row.getValue("deliveryStatus") === "PENDING",
-                        })}
-                    >
-                        {row.getValue("deliveryStatus")}
-                    </span>
+                    <div className="flex flex-col items-start gap-1">
+                        <span
+                            className={cn("px-2 py-1 rounded-full text-xs font-semibold", {
+                                "bg-green-100 text-green-800":
+                                    row.getValue("deliveryStatus") === "DELIVERED",
+                                "bg-red-100 text-red-800":
+                                    row.getValue("deliveryStatus") === "FAILED",
+                                "bg-yellow-100 text-yellow-800":
+                                    row.getValue("deliveryStatus") === "PENDING",
+                            })}
+                        >
+                            {row.getValue("deliveryStatus")}
+                        </span>
+                        {row.original.deliveryStatus === "FAILED" && row.original.deliveryError ? (
+                            <span className="text-xs/5 text-red-700 max-w-xs">
+                                <code className="font-mono">{row.original.errorCode}</code>:{" "}
+                                {row.original.deliveryError}
+                            </span>
+                        ) : null}
+                    </div>
                 ),
             },
         ],

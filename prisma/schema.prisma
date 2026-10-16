@@ -63,6 +63,8 @@ model Event {
   name             String
   fields           Json
   deliveryStatus   deliveryStatus @default(PENDING)
+  deliveryError    String?
+  errorCode        String?
   createdAt        DateTime       @default(now())
   updatedAt        DateTime       @updatedAt
   EventCategory    EventCategory? @relation(fields: [eventCategoryId], references: [id])

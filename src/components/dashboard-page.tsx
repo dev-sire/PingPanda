@@ -5,6 +5,7 @@ import { Button } from "./ui/button";
 import { ArrowLeft } from "lucide-react";
 import { Heading } from "./heading";
 import { useRouter } from "next/navigation";
+import { DiscordStatusBanner } from "./discord-status-banner";
 
 interface DashboardPageProps {
     title: string;
@@ -32,7 +33,10 @@ export const DashboardPage = ({ title, children, hideBackButton, cta }: Dashboar
                     {cta ? <div className="w-full">{cta}</div> : null}
                 </div>
             </div>
-            <div className="flex-1 p-6 sm:p-8 flex flex-col overflow-y-auto">{children}</div>
+            <div className="flex-1 p-6 sm:p-8 flex flex-col overflow-y-auto">
+                <DiscordStatusBanner />
+                {children}
+            </div>
         </section>
     )
 }
