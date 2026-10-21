@@ -9,7 +9,7 @@
  *
  * Optional keys unlock the cases that need a specific account state:
  *   KEY_NO_DISCORD      user with NO Discord ID saved      -> DISCORD_ID_MISSING
- *   KEY_NOT_IN_SERVER   user whose Discord ID is NOT in the server (or DMs closed) -> DM_BLOCKED
+ *   KEY_NOT_IN_SERVER   user whose Discord ID is NOT in the server (or DMs closed) -> USER_NOT_IN_SERVER
  *   KEY_QUOTA_FULL      user already at their monthly limit -> QUOTA_EXCEEDED
  *
  * SKIP_SEND=1 skips the happy-path case (it sends a real Discord DM and uses 1 quota).
@@ -106,7 +106,7 @@ const cases = [
     name: "User not in server / DMs closed",
     skip: KEY_NOT_IN_SERVER ? null : "set KEY_NOT_IN_SERVER",
     run: () => call({ key: KEY_NOT_IN_SERVER, body: validBody }),
-    expect: { status: 403, code: "DM_BLOCKED", eventId: true },
+    expect: { status: 403, code: "USER_NOT_IN_SERVER", eventId: true },
   },
   {
     name: "Monthly quota exhausted",
@@ -160,7 +160,7 @@ async function main() {
   console.log(`\n${passed} passed, ${failed} failed, ${skipped} skipped`)
   console.log(
     "\nManual checks: open the category page in the dashboard. The happy-path row should be DELIVERED,\n" +
-    "and the DM_BLOCKED row (if run) should be FAILED with its error code and message under the badge."
+    "and the USER_NOT_IN_SERVER row (if run) should be FAILED with its error code and message under the badge."
   )
   process.exit(failed ? 1 : 0)
 }

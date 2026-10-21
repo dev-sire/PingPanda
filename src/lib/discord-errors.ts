@@ -13,12 +13,19 @@ export const classifyDiscordError = (error: unknown): DeliveryFailure => {
     const e = error as { status?: number; code?: number }
 
     switch (e?.code) {
-        case 50007:
+        case 50278:
             return {
-                code: "DM_BLOCKED",
+                code: "USER_NOT_IN_SERVER",
                 httpStatus: 403,
                 message:
-                    "Discord refused the DM. The user must join the PingPanda Discord server and allow direct messages from server members.",
+                    "Discord can't DM this user because they share no server with the PingPanda bot. The user must join the PingPanda Discord server.",
+            }
+        case 50007:
+            return {
+                code: "DMS_CLOSED",
+                httpStatus: 403,
+                message:
+                    "The user has direct messages from server members turned off. They must allow DMs from the PingPanda server in their Discord privacy settings.",
             }
         case 10013:
             return {

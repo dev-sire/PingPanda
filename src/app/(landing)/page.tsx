@@ -10,6 +10,7 @@ import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import Image from "next/image";
 import { Icons } from "@/components/icons";
 import Link from "next/link";
+import { WebGLShader } from "@/components/ui/web-gl-shader";
 
 const Page = () => {
 
@@ -30,8 +31,12 @@ const Page = () => {
 
 	return (
 		<>
-			<section className="relative py-24 sm:py-32 bg-brand-25">
-				<MaxWidthWrapper className="text-center">
+			<section className="relative overflow-hidden py-24 sm:py-32 bg-brand-25">
+				<WebGLShader className="absolute inset-0" />
+				{/* soft wash behind the copy for readability, and a fade into the next section */}
+				<div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_55%_at_50%_50%,rgba(248,249,253,0.9),rgba(248,249,253,0)_100%)]" />
+				<div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-brand-25 to-transparent" />
+				<MaxWidthWrapper className="relative text-center">
 					<div className="relative mx-auto text-center flex flex-col items-center gap-10">
 						<div>
 							<Heading>
