@@ -11,6 +11,8 @@ import Image from "next/image";
 import { Icons } from "@/components/icons";
 import Link from "next/link";
 import { WebGLShader } from "@/components/ui/web-gl-shader";
+import { TestimonialSlider } from "@/components/ui/sliding-testimonial";
+import { testimonials } from "@/lib/testimonials";
 
 const Page = () => {
 
@@ -126,7 +128,7 @@ const Page = () => {
 					</MaxWidthWrapper>
 				</div>
 			</section>
-			<section className="relative py-24 sm:py-32 bg-brand-25">
+			<section id="features" className="relative scroll-mt-16 py-24 sm:py-32 bg-brand-25">
 				<MaxWidthWrapper className="flex flex-col items-center gap-16 sm:gap-20">
 					<div>
 						<h2 className="text-center text-base/7 font-semibold text-brand-600">
@@ -136,7 +138,7 @@ const Page = () => {
 					</div>
 					<div className="grid gap-4 lg:grid-cols-3 lg:grid-rows-2">
 						{/* First Bento grid element */}
-						<div className="relative row-span-2">
+						<div id="feature-realtime" className="relative row-span-2 scroll-mt-24">
 							<div className="absolute inset-px rounded-lg bg-white lg:rounded-lg-[2rem]" />
 							<div className="relative flex flex-col h-full overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] lg:rounded-l-[calc(2rem+1px)]">
 								<div className="pb-3 pt-8 px-8 sm:px-10 sm:pb-0 sm:pt-10">
@@ -156,7 +158,7 @@ const Page = () => {
 							<div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 lg:rounded-l-[2rem]" />
 						</div>
 						{/* Second Bento grid element */}
-						<div className="relative max-lg:row-start-1">
+						<div id="feature-events" className="relative max-lg:row-start-1 scroll-mt-24">
 							<div className="absolute inset-px rounded-lg bg-white max-lg:rounded-t-[2rem]" />
 							<div className="relative flex flex-col h-full overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] max-lg:rounded-t-[calc(2rem+1px)]">
 								<div className="px-8 pt-8 sm:px-10 sm:pt-10">
@@ -174,7 +176,7 @@ const Page = () => {
 							<div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 max-lg:rounded-t-[2rem]" />
 						</div>
 						{/* Third Bento Grid Element */}
-						<div className="relative row-start-3 lg:col-start-2 lg:row-start-2">
+						<div id="feature-properties" className="relative row-start-3 lg:col-start-2 lg:row-start-2 scroll-mt-24">
 							<div className="absolute inset-px rounded-lg bg-white" />
 							<div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)]">
 								<div className="px-8 pt-8 sm:px-10 sm:pt-10">
@@ -192,7 +194,7 @@ const Page = () => {
 							<div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5" />
 						</div>
 						{/* Fourth Bento Grid Element */}
-						<div className="relative lg:row-span-2">
+						<div id="feature-integration" className="relative lg:row-span-2 scroll-mt-24">
 							<div className="absolute inset-px rounded-lg bg-white max-lg:rounded-b-[2rem] lg:rounded-r-[2rem]" />
 							<div className="relative flex flex-col h-full overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] max-lg:rounded-b-[calc(2rem+1px)] lg:rounded-r-[calc(2rem+1px)]">
 								<div className="px-8 pb-3 pt-8 sm:px-10 sm:pb-0 sm:pt-10">
@@ -241,70 +243,21 @@ const Page = () => {
 					</div>
 				</MaxWidthWrapper>
 			</section>
-			<section className="relative py-24 sm:py-32 bg-white">
-				<MaxWidthWrapper className="flex flex-col items-center gap-16 sm:gap-20">
-					<div>
+			<section id="reviews" className="relative scroll-mt-16 overflow-hidden py-24 sm:py-32 bg-white">
+				<div className="flex flex-col items-center gap-16 sm:gap-20">
+					<MaxWidthWrapper>
 						<h2 className="text-center text-base/7 font-semibold text-brand-600">
 							Real-world Experiences
 						</h2>
 						<Heading className="text-center">What our customers say</Heading>
-					</div>
-					<div className="mx-auto grid max-w-2xl grid-cols-1 px-4 lg:mx-0 lg:max-w-none lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x divide-gray-200">
-						{/* First customer review */}
-						<div className="flex flex-auto flex-col gap-4 bg-brand-25 p-6 sm:p-8 lg:p-16 rounded-t-[2rem] lg:rounded-tr-none lg:rounded-l-[2rem]">
-							<div className="flex gap-0.5 mb-2 justify-center lg:justify-start">
-								<Star className="size-5 text-brand-600 fill-brand-600" />
-								<Star className="size-5 text-brand-600 fill-brand-600" />
-								<Star className="size-5 text-brand-600 fill-brand-600" />
-								<Star className="size-5 text-brand-600 fill-brand-600" />
-								<Star className="size-5 text-brand-600 fill-brand-600" />
-							</div>
-							<p className="text-base sm:text-lg lg:text-lg/8 font-medium tracking-tight text-brand-950 text-center lg:text-left text-pretty">
-								PingPanda has been a game-changer for me. I've been using it for two months and seeing sales pop-up in real-time is super satisfying.
-							</p>
-							<div className="flex flex-col justify-center lg:justify-start sm:flex-row items-center sm:items-start gap-4 mt-2">
-								<Image src="/user-2.png" alt="user 2 image" className="rounded-full object-cover" width={48} height={48} />
-								<div className="flex flex-col items-center sm:items-start">
-									<p className="font-semibold flex items-center">
-										Freya Larsson
-										<Icons.verificationBadge className="size-4 inline-block ml-1.5" />
-									</p>
-									<p className="text-sm text-gray-600">@itsfreya</p>
-								</div>
-							</div>
-						</div>
-						{ /* Second customer review */ }
-						<div className="flex flex-auto flex-col gap-4 bg-brand-25 p-6 sm:p-8 lg:p-16 rounded-b-[2rem] lg:rounded-bl-none lg:rounded-r-[2rem]">
-							<div className="flex gap-0.5 mb-2 justify-center lg:justify-start">
-								<Star className="size-5 text-brand-600 fill-brand-600" />
-								<Star className="size-5 text-brand-600 fill-brand-600" />
-								<Star className="size-5 text-brand-600 fill-brand-600" />
-								<Star className="size-5 text-brand-600 fill-brand-600" />
-							</div>
-							<p className="text-base sm:text-lg lg:text-lg/8 font-medium tracking-tight text-brand-950 text-center lg:text-left text-pretty">
-								PingPanda is paying off for our SaaS. Nice to have a simple to see what we're doing day-to-day. Definitely makes our lives easier.
-							</p>
-							<div className="flex flex-col justify-center lg:justify-start sm:flex-row items-center sm:items-start gap-4 mt-2">
-								<Image src="/user-1.png" alt="user 2 image" className="rounded-full object-cover" width={48} height={48} />
-								<div className="flex flex-col items-center sm:items-start">
-									<p className="font-semibold flex items-center">
-										Kai Durant
-										<Icons.verificationBadge className="size-4 inline-block ml-1.5" />
-									</p>
-									<p className="text-sm text-gray-600">@ig_kai</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<ShinyButton href="/sign-up" className="relative h-14 z-10 w-full max-w-xs text-base shadow-lg transition-shadow duration-300 hover:shadow-xl">
-						Start For Free Today
-					</ShinyButton>
-					<div>
-						<h2 className="text-center text-base/7 font-semibold text-brand-600">
-							Built with ❤️ by Aman Shahid, you can contribute to the project on <Link href="https://github.com/dev-sire/PingPanda" target="_blank" className="font-bold">GitHub</Link>
-						</h2>
-					</div>
-				</MaxWidthWrapper>
+					</MaxWidthWrapper>
+					<TestimonialSlider testimonials={testimonials} />
+					<MaxWidthWrapper className="flex justify-center">
+						<ShinyButton href="/sign-up" className="relative h-14 z-10 w-full max-w-xs text-base shadow-lg transition-shadow duration-300 hover:shadow-xl">
+							Start For Free Today
+						</ShinyButton>
+					</MaxWidthWrapper>
+				</div>
 			</section>
 		</>
 	)
