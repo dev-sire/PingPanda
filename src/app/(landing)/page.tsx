@@ -13,6 +13,7 @@ import Link from "next/link";
 import { WebGLShader } from "@/components/ui/web-gl-shader";
 import { TestimonialSlider } from "@/components/ui/sliding-testimonial";
 import { testimonials } from "@/lib/testimonials";
+import { Reveal } from "@/components/reveal";
 
 const Page = () => {
 
@@ -39,7 +40,7 @@ const Page = () => {
 				<div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_55%_at_50%_50%,rgba(248,249,253,0.9),rgba(248,249,253,0)_100%)]" />
 				<div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-brand-25 to-transparent" />
 				<MaxWidthWrapper className="relative text-center">
-					<div className="relative mx-auto text-center flex flex-col items-center gap-10">
+					<div className="reveal-onload relative mx-auto text-center flex flex-col items-center gap-10">
 						<div>
 							<Heading>
 								<span>Real-time SaaS Insights,</span>
@@ -79,7 +80,7 @@ const Page = () => {
 				<div className="absolute inset-x-0 bottom-24 top-24 bg-brand-700" />
 				<div className="relative mx-auto">
 					<MaxWidthWrapper className="relative">
-						<div className="-m-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-inset-900/10 lg:-m-4 lg:rounded-2xl lg:p-4">
+						<Reveal className="-m-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-inset-900/10 lg:-m-4 lg:rounded-2xl lg:p-4">
 							<MockDiscordUI>
 								<AnimatedList>
 									<DiscordMessage
@@ -124,19 +125,19 @@ const Page = () => {
 									/>
 								</AnimatedList>
 							</MockDiscordUI>
-						</div>
+						</Reveal>
 					</MaxWidthWrapper>
 				</div>
 			</section>
 			<section id="features" className="relative scroll-mt-16 py-24 sm:py-32 bg-brand-25">
 				<MaxWidthWrapper className="flex flex-col items-center gap-16 sm:gap-20">
-					<div>
+					<Reveal>
 						<h2 className="text-center text-base/7 font-semibold text-brand-600">
 							Intuitive Monitoring
 						</h2>
 						<Heading className="text-center">Stay ahead of real-time insights</Heading>
-					</div>
-					<div className="grid gap-4 lg:grid-cols-3 lg:grid-rows-2">
+					</Reveal>
+					<Reveal stagger className="grid gap-4 lg:grid-cols-3 lg:grid-rows-2">
 						{/* First Bento grid element */}
 						<div id="feature-realtime" className="relative row-span-2 scroll-mt-24">
 							<div className="absolute inset-px rounded-lg bg-white lg:rounded-lg-[2rem]" />
@@ -240,23 +241,29 @@ const Page = () => {
 							</div>
 							<div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 max-lg:rounded-b-[2rem]" />
 						</div>
-					</div>
+					</Reveal>
 				</MaxWidthWrapper>
 			</section>
 			<section id="reviews" className="relative scroll-mt-16 overflow-hidden py-24 sm:py-32 bg-white">
 				<div className="flex flex-col items-center gap-16 sm:gap-20">
+					<Reveal className="w-full">
 					<MaxWidthWrapper>
 						<h2 className="text-center text-base/7 font-semibold text-brand-600">
 							Real-world Experiences
 						</h2>
 						<Heading className="text-center">What our customers say</Heading>
 					</MaxWidthWrapper>
-					<TestimonialSlider testimonials={testimonials} />
+					</Reveal>
+					<Reveal className="w-full" delay={100}>
+						<TestimonialSlider testimonials={testimonials} />
+					</Reveal>
+					<Reveal className="w-full" delay={100}>
 					<MaxWidthWrapper className="flex justify-center">
 						<ShinyButton href="/sign-up" className="relative h-14 z-10 w-full max-w-xs text-base shadow-lg transition-shadow duration-300 hover:shadow-xl">
 							Start For Free Today
 						</ShinyButton>
 					</MaxWidthWrapper>
+					</Reveal>
 				</div>
 			</section>
 		</>

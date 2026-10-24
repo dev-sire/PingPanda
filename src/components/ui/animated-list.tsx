@@ -5,6 +5,9 @@ import { AnimatePresence, motion, useInView } from "framer-motion";
 
 import { cn } from "@/utils";
 
+// Raise towards 0% to start earlier, lower (e.g. -30%) to start later.
+const START_MARGIN = "0px 0px -10% 0px"
+
 export interface AnimatedListProps {
 	className?: string;
 	children: React.ReactNode;
@@ -15,9 +18,9 @@ export const AnimatedList = React.memo(
 	({ className, children, delay = 1000 }: AnimatedListProps) => {
 		const ref = useRef<HTMLDivElement>(null)
 
-		// Don't start until the list has scrolled into view (the bottom 40% of the
-		// viewport doesn't count, so it begins when it's properly on screen).
-		const inView = useInView(ref, { once: true, margin: "0px 0px -40% 0px" })
+		// Starts once the list is on screen. A negative bottom margin delays the start
+		// (-40% was too late); 0% would fire the moment its top edge peeks in.
+		const inView = useInView(ref, { once: true, margin: START_MARGIN })
 
 		const [count, setCount] = useState(0)
 		const items = React.Children.toArray(children)

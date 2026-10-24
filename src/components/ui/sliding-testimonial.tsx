@@ -69,9 +69,12 @@ const TestimonialCard = ({ testimonial, hidden }: { testimonial: Testimonial; hi
 export const TestimonialSlider = ({
     testimonials,
     className,
+    secondsPerCard = 9,
 }: {
     testimonials: Testimonial[]
     className?: string
+    /** Lower is faster. */
+    secondsPerCard?: number
 }) => {
     // Two copies side by side: the track slides by exactly one copy, then loops seamlessly.
     const loop = [...testimonials, ...testimonials]
@@ -85,9 +88,14 @@ export const TestimonialSlider = ({
                     WebkitMaskImage:
                         "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
                 }}
-                className="relative flex w-full max-w-full overflow-hidden motion-reduce:overflow-x-auto"
+                className="relative flex w-full max-w-full overflow-hidden"
             >
-                <div className="flex w-max animate-x-slider gap-5 py-2 hover:[animation-play-state:paused] motion-reduce:animate-none">
+                <div
+                    // Inline on purpose: it keeps sliding even if the OS asks apps to reduce motion
+                    // (a slow marquee that pauses on hover/focus), and never depends on Tailwind config.
+                    style={{ animation: `x-slider ${testimonials.length * secondsPerCard}s linear infinite` }}
+                    className="flex w-max gap-5 py-2 hover:[animation-play-state:paused] focus-within:[animation-play-state:paused]"
+                >
                     {loop.map((testimonial, index) => (
                         <TestimonialCard
                             key={index}

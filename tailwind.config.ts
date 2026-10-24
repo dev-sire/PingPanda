@@ -74,6 +74,9 @@ const config: Config = {
   				'5': 'hsl(var(--chart-5))'
   			}
   		},
+  		animation: {
+  			wave: 'wave 16s linear infinite'
+  		},
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',

@@ -1,10 +1,15 @@
 import { SignUp } from "@clerk/nextjs";
+import { AuthBackdrop, authAppearance } from "@/components/auth-backdrop";
 
 const Page = () => {
     return(
-        <div className="w-full flex flex-1 items-center justify-center">
-            <SignUp fallbackRedirectUrl="/welcome" forceRedirectUrl="/welcome" />
-        </div>
+        <AuthBackdrop>
+            <SignUp
+                appearance={authAppearance}
+                fallbackRedirectUrl="/welcome"
+                forceRedirectUrl="/welcome"
+            />
+        </AuthBackdrop>
     )
 }
 

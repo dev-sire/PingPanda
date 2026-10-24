@@ -64,3 +64,99 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+/* ---------- Motion ---------- */
+
+@keyframes x-slider {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-50% - 0.625rem)); }
+}
+
+@keyframes wave {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes reveal-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Smooth scrolling for in-page links (e.g. the navbar's Features / Reviews). */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Scroll-triggered: <Reveal> flips data-revealed when the element is on screen. */
+  .reveal,
+  .reveal-stagger > * {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+      opacity 700ms cubic-bezier(0.21, 0.47, 0.32, 0.98),
+      transform 700ms cubic-bezier(0.21, 0.47, 0.32, 0.98);
+  }
+
+  .reveal {
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .reveal[data-revealed="true"],
+  .reveal-stagger[data-revealed="true"] > * {
+    opacity: 1;
+    transform: none;
+  }
+
+  .reveal-stagger > :nth-child(1) { transition-delay: calc(var(--reveal-delay, 0ms) + 0ms); }
+  .reveal-stagger > :nth-child(2) { transition-delay: calc(var(--reveal-delay, 0ms) + 110ms); }
+  .reveal-stagger > :nth-child(3) { transition-delay: calc(var(--reveal-delay, 0ms) + 220ms); }
+  .reveal-stagger > :nth-child(4) { transition-delay: calc(var(--reveal-delay, 0ms) + 330ms); }
+  .reveal-stagger > :nth-child(5) { transition-delay: calc(var(--reveal-delay, 0ms) + 440ms); }
+  .reveal-stagger > :nth-child(6) { transition-delay: calc(var(--reveal-delay, 0ms) + 550ms); }
+  .reveal-stagger > :nth-child(7) { transition-delay: calc(var(--reveal-delay, 0ms) + 660ms); }
+  .reveal-stagger > :nth-child(8) { transition-delay: calc(var(--reveal-delay, 0ms) + 770ms); }
+
+  /* On load, for above-the-fold content: pure CSS, so it doesn't wait for hydration. */
+  .reveal-onload > * {
+    animation: reveal-up 700ms cubic-bezier(0.21, 0.47, 0.32, 0.98) both;
+  }
+
+  .reveal-onload > :nth-child(1) { animation-delay: 80ms; }
+  .reveal-onload > :nth-child(2) { animation-delay: 190ms; }
+  .reveal-onload > :nth-child(3) { animation-delay: 300ms; }
+  .reveal-onload > :nth-child(4) { animation-delay: 410ms; }
+  .reveal-onload > :nth-child(5) { animation-delay: 520ms; }
+  .reveal-onload > :nth-child(6) { animation-delay: 630ms; }
+  .reveal-onload > :nth-child(7) { animation-delay: 740ms; }
+  .reveal-onload > :nth-child(8) { animation-delay: 850ms; }
+
+  /* Reduced motion: keep the fade, drop the movement. */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal,
+    .reveal-stagger > * {
+      transform: none;
+    }
+
+    .reveal-onload > * {
+      animation-name: reveal-fade;
+    }
+  }
+
+  /* Without JavaScript nothing would ever reveal, so show everything. */
+  @media (scripting: none) {
+    .reveal,
+    .reveal-stagger > * {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}

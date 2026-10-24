@@ -2,6 +2,7 @@
 
 import { SignIn } from "@clerk/nextjs";
 import { useSearchParams } from "next/navigation";
+import { AuthBackdrop, authAppearance } from "@/components/auth-backdrop";
 
 const Page = () => {
 
@@ -9,9 +10,12 @@ const Page = () => {
     const intent = searchParams.get("intent")
 
     return(
-        <div className="w-full flex flex-1 items-center justify-center">
-            <SignIn forceRedirectUrl={intent ? `/dashboard?intent=${intent}` : "/dashboard"} />
-        </div>
+        <AuthBackdrop>
+            <SignIn
+                appearance={authAppearance}
+                forceRedirectUrl={intent ? `/dashboard?intent=${intent}` : "/dashboard"}
+            />
+        </AuthBackdrop>
     )
 }
 
